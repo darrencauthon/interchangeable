@@ -1,6 +1,6 @@
 # Setting
 
-The `setting` library configures objects to receive settings that are added to a configuration registry.
+The `setting` library configures objects to receive settings that are added to its configuration registry.
 
 The registry is structured as a hierarchy that can be based on namespaces (eg: modules, nested classes, etc).
 
