@@ -1,8 +1,6 @@
 # Setting
 
-The `setting` library configures objects to receive settings that are added to its configuration registry.
-
-The registry is structured as a hierarchy that can be based on namespaces (eg: modules, nested classes, etc).
+The `setting` library configures objects that can receive settings that are added to a configuration registry.
 
 ## Basic Examples
 
@@ -56,6 +54,8 @@ Setting::Registry.build do |registry|
   end
 end
 ```
+
+The registry is structured as a hierarchy that can be based on namespaces (eg: modules, nested classes, etc).
 
 An instance of the `Something` class is added to the registry. Any object in the namespace `SomeNamespace` (i.e.: in a module named `SomeNamespace` or nested within an outer class named `SomeNamespace`) with a setting named `some_setting` can receive the `Something` instance when the object is configured.
 
