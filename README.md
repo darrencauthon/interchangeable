@@ -2,6 +2,12 @@
 
 The `setting` library configures objects that can receive settings that are added to a configuration registry.
 
+## Project Status: Exploratory Specification
+
+The `setting` library is not implemented.
+
+This specification is exploratory. Although a number of the techniques and tools mentioned here have been implemented individual in other projects, thay have not been assembled as a cohesive library.
+
 ## Basic Examples
 
 ### Configuring an Object
