@@ -1,13 +1,23 @@
-# -*- encoding: utf-8 -*-
-Gem::Specification.new do |s|
-  s.name = 'setting'
-  s.summary = 'Configuration Setting Library'
-  s.version = '0.0.0'
-  s.authors = ['The Sans Collective']
-  s.license = 'MIT'
-  s.homepage = 'https://github.com/Sans/setting'
-  s.require_paths = ['lib']
-  s.files = Dir.glob('{lib}/**/*')
-  s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 2'
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'setting/version'
+
+Gem::Specification.new do |spec|
+  spec.name          = "setting"
+  spec.version       = Setting::VERSION
+  spec.authors       = ["Darren Cauthon"]
+  spec.email         = ["darren@cauthon.com"]
+  spec.summary       = %q{TODO: Write a short summary. Required.}
+  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.homepage      = ""
+  spec.license       = "MIT"
+
+  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+
+  spec.add_development_dependency "bundler", "~> 1.6"
+  spec.add_development_dependency "rake"
 end
