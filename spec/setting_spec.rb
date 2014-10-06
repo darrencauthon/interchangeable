@@ -55,6 +55,7 @@ describe Setting do
             instance.instance_eval { @something = a }
             instance.send(example.method_name.to_sym).must_be_same_as a
           end
+
         end
 
 
