@@ -37,7 +37,8 @@ describe Setting do
           end
 
           it "should stamp the method on the object" do
-            eval(example.class_name).new.send(example.method_name.to_sym).must_be_same_as the_return_value
+            instance = eval(example.class_name).new
+            instance.send(example.method_name.to_sym).must_be_same_as the_return_value
           end
 
         end
