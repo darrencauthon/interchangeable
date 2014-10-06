@@ -15,7 +15,7 @@ describe Setting do
       ["Yawn", "applesauce"],
     ].map { |x| Struct.new(:class_name, :method_name).new(*x) }.each do |example|
 
-      describe "defining a client-specific method on a class" do
+      describe "noting a client-specific method on a class" do
 
         before do
           eval("class #{example.class_name}
@@ -27,7 +27,7 @@ describe Setting do
           Setting.settings.count.must_equal 1
         end
 
-        describe "defining a client-specific method" do
+        describe "defining the client-specific method" do
 
           let(:the_return_value) { Object.new }
 
