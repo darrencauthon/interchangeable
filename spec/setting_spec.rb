@@ -43,6 +43,21 @@ describe Setting do
 
         end
 
+        describe "accessing private members of the class" do
+
+          before do
+            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { @something }
+          end
+
+          it "should be able to access the private member" do
+            instance = eval(example.class_name).new
+            a = Object.new
+            instance.instance_eval { @something = a }
+            instance.send(example.method_name.to_sym).must_be_same_as a
+          end
+        end
+
+
       end
 
     end
