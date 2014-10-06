@@ -10,14 +10,18 @@ describe Setting do
 
   describe "defining a client specific method" do
 
-    before do
-      class Blah
-        client_specific :something
-      end
-    end
+    describe "defining a client-specific method on a class" do
 
-    it "should create an entry in the settings" do
-      Setting.settings.count.must_equal 1
+      before do
+        class Blah
+          client_specific :something
+        end
+      end
+
+      it "should create an entry in the settings" do
+        Setting.settings.count.must_equal 1
+      end
+
     end
 
   end
