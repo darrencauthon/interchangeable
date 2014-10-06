@@ -11,6 +11,10 @@ module Setting
     def settings
       [Object.new]
     end
+
+    def define _, _, &block
+      Blah.instance_eval { define_method :something, &block }
+    end
   end
 
 end
