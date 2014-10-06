@@ -32,8 +32,8 @@ describe Setting do
           let(:the_return_value) { Object.new }
 
           before do
-            a = the_return_value
-            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { a }
+            object = the_return_value
+            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { object }
           end
 
           it "should stamp the method on the object" do
@@ -45,19 +45,17 @@ describe Setting do
 
         describe "accessing private members of the class" do
 
-          before do
-            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { @something }
-          end
+          before { Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { @something } }
 
           it "should be able to access the private member" do
+            object = Object.new
+
             instance = eval(example.class_name).new
-            a = Object.new
-            instance.instance_eval { @something = a }
-            instance.send(example.method_name.to_sym).must_be_same_as a
+            instance.instance_eval { @something = object }
+            instance.send(example.method_name.to_sym).must_be_same_as object
           end
 
         end
-
 
       end
 
