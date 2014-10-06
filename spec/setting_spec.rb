@@ -10,29 +10,36 @@ describe Setting do
 
   describe "defining a client specific method" do
 
-    describe "defining a client-specific method on a class" do
+    [
+      ["Blah", "something"],
+      ["Yawn", "applesauce"],
+    ].map { |x| Struct.new(:class_name, :method_name).new(*x) }.each do |example|
 
-      before do
-        class Blah
-          client_specific :something
-        end
-      end
-
-      it "should create an entry in the settings" do
-        Setting.settings.count.must_equal 1
-      end
-
-      describe "defining a client-specific method" do
-
-        let(:the_return_value) { Object.new }
+      describe "defining a client-specific method on a class" do
 
         before do
-          a = the_return_value
-          Setting.define(Blah, :something) { a }
+          eval("class #{example.class_name}
+                  client_specific :#{example.method_name}
+                end")
         end
 
-        it "should stamp the method on the object" do
-          Blah.new.something.must_be_same_as the_return_value
+        it "should create an entry in the settings" do
+          Setting.settings.count.must_equal 1
+        end
+
+        describe "defining a client-specific method" do
+
+          let(:the_return_value) { Object.new }
+
+          before do
+            a = the_return_value
+            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { a }
+          end
+
+          it "should stamp the method on the object" do
+            eval(example.class_name).new.send(example.method_name.to_sym).must_be_same_as the_return_value
+          end
+
         end
 
       end

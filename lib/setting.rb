@@ -12,8 +12,10 @@ module Setting
       [Object.new]
     end
 
-    def define _, _, &block
-      Blah.instance_eval { define_method :something, &block }
+    def define the_class, method_name, &block
+      the_class.instance_eval do
+        define_method method_name, &block
+      end
     end
   end
 
