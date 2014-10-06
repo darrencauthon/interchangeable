@@ -57,11 +57,30 @@ describe Setting do
 
         end
 
+        describe "defining the client-specific method, but with arguments" do
+
+          let(:apple)  { Object.new }
+          let(:orange) { Object.new }
+
+          before do
+            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) do |a, b|
+              [a, b]
+            end
+          end
+
+          it "should allow me to call the method with arguments" do
+            instance = eval(example.class_name).new
+
+            result = instance.send(example.method_name.to_sym, apple, orange)
+            result.must_equal [apple, orange]
+          end
+
+        end
+
       end
 
     end
 
   end
-
 
 end
