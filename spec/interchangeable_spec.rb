@@ -9,14 +9,15 @@ describe Interchangeable do
   describe "defining an instance-level method on a class" do
 
     [
-      ["Blah", "something"],
-      ["Yawn", "applesauce"],
-    ].map { |x| Struct.new(:class_name, :method_name).new(*x) }.each do |example|
+      ["Blah", "something",  "this is a special method"],
+      ["Yawn", "applesauce", "make sure this works"],
+    ].map { |x| Struct.new(:class_name, :method_name, :description).new(*x) }.each do |example|
 
       describe "noting the method on a class" do
 
         before do
           eval("class #{example.class_name}
+                  interchangeable_describe \"#{example.description}\"
                   interchangeable_instance_method :#{example.method_name}
                 end")
         end
@@ -45,6 +46,10 @@ describe Interchangeable do
 
           it "should say that it is not using the default implementation" do
             Interchangeable.entries.first.default.must_equal false
+          end
+
+          it "should include the description" do
+            Interchangeable.entries.first.description.must_equal example.description
           end
 
         end
