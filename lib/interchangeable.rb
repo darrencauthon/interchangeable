@@ -9,8 +9,8 @@ class Class
   def interchangeable_instance_method *args, &block
     description = @interchangeable_description
     @interchangeable_description = nil
-    entry = Struct.new(:method_name, :target, :level, :implemented, :default, :description)
-                  .new(args[0], self, :instance, false, false, description)
+    entry = Struct.new(:method_name, :target, :implemented, :default, :description)
+                  .new(args[0], self, false, false, description)
     Interchangeable.entries << entry
     if block
       Interchangeable.define self, args[0], &block

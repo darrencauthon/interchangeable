@@ -36,10 +36,6 @@ describe Interchangeable do
             Interchangeable.entries.first.target.must_equal eval(example.class_name)
           end
 
-          it "should say that its an instance method" do
-            Interchangeable.entries.first.level.must_equal :instance
-          end
-
           it "should say that it is not implemented" do
             Interchangeable.entries.first.implemented.must_equal false
           end
