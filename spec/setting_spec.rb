@@ -93,6 +93,31 @@ describe Setting do
 
       end
 
+      describe "noting the method on a class with a default implementation" do
+
+        ['potato', 'tomato'].each do |default_value|
+
+          describe "multiple examples" do
+
+            before do
+              eval("class #{example.class_name}
+                      instance_method(:#{example.method_name}) { \"#{default_value}\" }
+                    end")
+            end
+
+            it "should return the default value if called" do
+              instance = eval(example.class_name).new
+
+              result = instance.send(example.method_name.to_sym)
+              result.must_equal default_value
+            end
+
+          end
+
+        end
+
+      end
+
     end
 
   end
