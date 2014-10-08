@@ -6,7 +6,7 @@ describe Setting do
     Setting.instance_eval { @settings = nil }
   end
 
-  describe "defining a client specific method" do
+  describe "defining an instance-level method on a class" do
 
     [
       ["Blah", "something"],
