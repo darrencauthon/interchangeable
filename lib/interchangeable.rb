@@ -2,10 +2,13 @@ require "interchangeable/version"
 
 class Class
   def interchangeable_instance_method *args, &block
-    entry = Struct.new(:method_name, :target, :level, :implemented)
-                  .new(args[0], self, :instance, false)
+    entry = Struct.new(:method_name, :target, :level, :implemented, :default)
+                  .new(args[0], self, :instance, false, false)
     Interchangeable.entries << entry
-    Interchangeable.define(self, args[0], &block) if block
+    if block
+      Interchangeable.define self, args[0], &block
+      entry.default = true
+    end
   end
 end
 

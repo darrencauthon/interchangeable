@@ -43,6 +43,10 @@ describe Interchangeable do
             Interchangeable.entries.first.implemented.must_equal false
           end
 
+          it "should say that it is not using the default implementation" do
+            Interchangeable.entries.first.default.must_equal false
+          end
+
         end
 
         describe "defining the method later" do
@@ -61,6 +65,10 @@ describe Interchangeable do
 
           it "should say that it is not implemented" do
             Interchangeable.entries.first.implemented.must_equal true
+          end
+
+          it "should say that it is not using the default implementation" do
+            Interchangeable.entries.first.default.must_equal false
           end
 
         end
@@ -120,8 +128,12 @@ describe Interchangeable do
               result.must_equal default_value
             end
 
-            it "should say that it is not implemented" do
+            it "should say that it is implemented" do
               Interchangeable.entries.first.implemented.must_equal true
+            end
+
+            it "should say that it is using the default implementation" do
+              Interchangeable.entries.first.default.must_equal true
             end
 
           end
