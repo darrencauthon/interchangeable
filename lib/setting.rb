@@ -1,7 +1,7 @@
 require "setting/version"
 
 class Class
-  def client_specific *args
+  def instance_method *args
   end
 end
 

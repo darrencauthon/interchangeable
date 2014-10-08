@@ -17,7 +17,7 @@ describe Setting do
 
         before do
           eval("class #{example.class_name}
-                  client_specific :#{example.method_name}
+                  instance_method :#{example.method_name}
                 end")
         end
 
