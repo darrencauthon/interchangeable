@@ -22,30 +22,30 @@ describe Interchangeable do
                 end")
         end
 
-        describe "entries" do
+        describe "methods" do
 
           it "should create an entry" do
-            Interchangeable.entries.count.must_equal 1
+            Interchangeable.methods.count.must_equal 1
           end
 
           it "should include the method name" do
-            Interchangeable.entries.first.method_name.must_equal example.method_name.to_sym
+            Interchangeable.methods.first.method_name.must_equal example.method_name.to_sym
           end
 
           it "should return the target" do
-            Interchangeable.entries.first.target.must_equal eval(example.class_name)
+            Interchangeable.methods.first.target.must_equal eval(example.class_name)
           end
 
           it "should say that it is not implemented" do
-            Interchangeable.entries.first.implemented.must_equal false
+            Interchangeable.methods.first.implemented.must_equal false
           end
 
           it "should say that it is not using the default implementation" do
-            Interchangeable.entries.first.default.must_equal false
+            Interchangeable.methods.first.default.must_equal false
           end
 
           it "should include the description" do
-            Interchangeable.entries.first.description.must_equal example.description
+            Interchangeable.methods.first.description.must_equal example.description
           end
 
         end
@@ -65,11 +65,11 @@ describe Interchangeable do
           end
 
           it "should say that it is not implemented" do
-            Interchangeable.entries.first.implemented.must_equal true
+            Interchangeable.methods.first.implemented.must_equal true
           end
 
           it "should say that it is not using the default implementation" do
-            Interchangeable.entries.first.default.must_equal false
+            Interchangeable.methods.first.default.must_equal false
           end
 
         end
@@ -130,11 +130,11 @@ describe Interchangeable do
             end
 
             it "should say that it is implemented" do
-              Interchangeable.entries.first.implemented.must_equal true
+              Interchangeable.methods.first.implemented.must_equal true
             end
 
             it "should say that it is using the default implementation" do
-              Interchangeable.entries.first.default.must_equal true
+              Interchangeable.methods.first.default.must_equal true
             end
 
             describe "and a new implementation is define elsewhere" do
@@ -155,7 +155,7 @@ describe Interchangeable do
               end
 
               it "should reset the default flag to false" do
-                Interchangeable.entries.first.default.must_equal false
+                Interchangeable.methods.first.default.must_equal false
               end
 
             end
@@ -180,8 +180,8 @@ describe Interchangeable do
     end
 
     it "should put the description on the first, but not the second" do
-      Interchangeable.entries[0].description.must_equal "That's a banana"
-      Interchangeable.entries[1].description.nil?.must_equal true
+      Interchangeable.methods[0].description.must_equal "That's a banana"
+      Interchangeable.methods[1].description.nil?.must_equal true
     end
   end
 

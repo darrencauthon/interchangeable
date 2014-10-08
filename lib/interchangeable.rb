@@ -11,7 +11,7 @@ class Class
     @interchangeable_description = nil
     entry = Struct.new(:method_name, :target, :implemented, :default, :description)
                   .new(args[0], self, false, false, description)
-    Interchangeable.entries << entry
+    Interchangeable.methods << entry
     if block
       Interchangeable.define self, args[0], &block
       entry.default = true
@@ -23,8 +23,8 @@ module Interchangeable
 
   class << self
 
-    attr_accessor :entries
-    def entries
+    attr_accessor :methods
+    def methods
       @settings ||= []
     end
 
@@ -32,7 +32,7 @@ module Interchangeable
       the_class.instance_eval do
         define_method method_name, &block
       end
-      entry = Interchangeable.entries.select { |x| x.target == the_class && x.method_name && method_name }.first
+      entry = Interchangeable.methods.select { |x| x.target == the_class && x.method_name && method_name }.first
       entry.implemented = true
       entry.default     = false
     end
