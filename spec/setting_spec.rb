@@ -3,9 +3,7 @@ require_relative 'minitest_spec'
 describe Setting do
 
   before do
-
     Setting.instance_eval { @settings = nil }
-
   end
 
   describe "defining a client specific method" do
