@@ -17,7 +17,7 @@ describe Setting do
 
         before do
           eval("class #{example.class_name}
-                  instance_method :#{example.method_name}
+                  interchangeable_instance_method :#{example.method_name}
                 end")
         end
 
@@ -101,7 +101,7 @@ describe Setting do
 
             before do
               eval("class #{example.class_name}
-                      instance_method(:#{example.method_name}) { \"#{default_value}\" }
+                      interchangeable_instance_method(:#{example.method_name}) { \"#{default_value}\" }
                     end")
             end
 
