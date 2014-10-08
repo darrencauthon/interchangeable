@@ -1,3 +1,3 @@
 require 'minitest/autorun'
 require 'minitest/spec'
-require_relative '../lib/setting'
+require_relative '../lib/interchangeable'

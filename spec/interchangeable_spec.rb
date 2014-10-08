@@ -1,9 +1,9 @@
 require_relative 'minitest_spec'
 
-describe Setting do
+describe Interchangeable do
 
   before do
-    Setting.instance_eval { @settings = nil }
+    Interchangeable.instance_eval { @settings = nil }
   end
 
   describe "defining an instance-level method on a class" do
@@ -24,19 +24,19 @@ describe Setting do
         describe "entries" do
 
           it "should create an entry" do
-            Setting.entries.count.must_equal 1
+            Interchangeable.entries.count.must_equal 1
           end
 
           it "should include the method name" do
-            Setting.entries.first.method_name.must_equal example.method_name.to_sym
+            Interchangeable.entries.first.method_name.must_equal example.method_name.to_sym
           end
 
           it "should return the target" do
-            Setting.entries.first.target.must_equal eval(example.class_name)
+            Interchangeable.entries.first.target.must_equal eval(example.class_name)
           end
 
           it "should say that it's an instance method" do
-            Setting.entries.first.level.must_equal :instance
+            Interchangeable.entries.first.level.must_equal :instance
           end
 
         end
@@ -47,7 +47,7 @@ describe Setting do
 
           before do
             object = the_return_value
-            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { object }
+            Interchangeable.define(eval(example.class_name), eval(":#{example.method_name}")) { object }
           end
 
           it "should stamp the method on the object" do
@@ -59,7 +59,7 @@ describe Setting do
 
         describe "accessing private members of the class" do
 
-          before { Setting.define(eval(example.class_name), eval(":#{example.method_name}")) { @something } }
+          before { Interchangeable.define(eval(example.class_name), eval(":#{example.method_name}")) { @something } }
 
           it "should be able to access the private member" do
             object = Object.new
@@ -77,7 +77,7 @@ describe Setting do
           let(:orange) { Object.new }
 
           before do
-            Setting.define(eval(example.class_name), eval(":#{example.method_name}")) do |a, b|
+            Interchangeable.define(eval(example.class_name), eval(":#{example.method_name}")) do |a, b|
               [a, b]
             end
           end

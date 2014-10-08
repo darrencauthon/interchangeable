@@ -1,14 +1,14 @@
-require "setting/version"
+require "interchangeable/version"
 
 class Class
   def interchangeable_instance_method *args, &block
-    Setting.entries << Struct.new(:method_name, :target, :level)
+    Interchangeable.entries << Struct.new(:method_name, :target, :level)
                              .new(args[0], self, :instance)
-    Setting.define(self, args[0], &block) if block
+    Interchangeable.define(self, args[0], &block) if block
   end
 end
 
-module Setting
+module Interchangeable
 
   class << self
 

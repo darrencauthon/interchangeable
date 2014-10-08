@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'setting/version'
+require 'interchangeable/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "setting"
-  spec.version       = Setting::VERSION
+  spec.name          = "interchangeable"
+  spec.version       = Interchangeable::VERSION
   spec.authors       = ["Darren Cauthon"]
   spec.email         = ["darren@cauthon.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Create and describe interchangeable components.}
+  spec.description   = %q{Extract interchangeable components in your application. Identify them, describe them, and allow others to swap them out easily.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
