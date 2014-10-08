@@ -5,10 +5,7 @@ class Class
     entry = Struct.new(:method_name, :target, :level, :implemented)
                   .new(args[0], self, :instance, false)
     Interchangeable.entries << entry
-    if block
-      Interchangeable.define(self, args[0], &block)
-      entry.implemented = true
-    end
+    Interchangeable.define(self, args[0], &block) if block
   end
 end
 
@@ -25,6 +22,7 @@ module Interchangeable
       the_class.instance_eval do
         define_method method_name, &block
       end
+      Interchangeable.entries.select { |x| x.target == the_class && x.method_name && method_name }.first.implemented = true
     end
   end
 

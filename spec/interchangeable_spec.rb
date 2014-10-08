@@ -59,6 +59,10 @@ describe Interchangeable do
             instance.send(example.method_name.to_sym).must_be_same_as the_return_value
           end
 
+          it "should say that it is not implemented" do
+            Interchangeable.entries.first.implemented.must_equal true
+          end
+
         end
 
         describe "accessing private members of the class" do
