@@ -21,8 +21,8 @@ describe Setting do
                 end")
         end
 
-        it "should create an entry in the settings" do
-          Setting.settings.count.must_equal 1
+        it "should create an entry in the entries" do
+          Setting.entries.count.must_equal 1
         end
 
         describe "defining the client-specific method" do

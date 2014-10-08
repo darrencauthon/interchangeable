@@ -8,7 +8,7 @@ end
 module Setting
 
   class << self
-    def settings
+    def entries
       [Object.new]
     end
 
