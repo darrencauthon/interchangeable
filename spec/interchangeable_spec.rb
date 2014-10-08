@@ -174,4 +174,19 @@ describe Interchangeable do
 
   end
 
+  describe "one description, then two methods" do
+    before do
+      eval("class SomethingElse
+              interchangeable_describe \"That's a banana\"
+              interchangeable_instance_method :banana
+              interchangeable_instance_method :kiwi
+            end")
+    end
+
+    it "should put the description on the first, but not the second" do
+      Interchangeable.entries[0].description.must_equal "That's a banana"
+      Interchangeable.entries[1].description.nil?.must_equal true
+    end
+  end
+
 end
