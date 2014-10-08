@@ -6,7 +6,7 @@ describe Interchangeable do
     Interchangeable.instance_eval { @settings = nil }
   end
 
-  describe "defining an instance-level method on a class" do
+  describe "defining a method on a class" do
 
     [
       ["Blah", "something",  "this is a special method"],
@@ -18,7 +18,7 @@ describe Interchangeable do
         before do
           eval("class #{example.class_name}
                   interchangeable_describe \"#{example.description}\"
-                  interchangeable_instance_method :#{example.method_name}
+                  interchangeable_method :#{example.method_name}
                 end")
         end
 
@@ -118,7 +118,7 @@ describe Interchangeable do
 
             before do
               eval("class #{example.class_name}
-                      interchangeable_instance_method(:#{example.method_name}) { \"#{default_value}\" }
+                      interchangeable_method(:#{example.method_name}) { \"#{default_value}\" }
                     end")
             end
 
@@ -174,8 +174,8 @@ describe Interchangeable do
     before do
       eval("class SomethingElse
               interchangeable_describe \"That's a banana\"
-              interchangeable_instance_method :banana
-              interchangeable_instance_method :kiwi
+              interchangeable_method :banana
+              interchangeable_method :kiwi
             end")
     end
 

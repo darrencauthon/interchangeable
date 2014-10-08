@@ -6,7 +6,7 @@ class Class
     @interchangeable_description = description
   end
 
-  def interchangeable_instance_method *args, &block
+  def interchangeable_method *args, &block
     description = @interchangeable_description
     @interchangeable_description = nil
     entry = Struct.new(:method_name, :target, :implemented, :default, :description)
