@@ -2,7 +2,8 @@ require "setting/version"
 
 class Class
   def instance_method *args
-    Setting.entries << Struct.new(:method_name, :target).new(args[0], self)
+    Setting.entries << Struct.new(:method_name, :target, :level)
+                             .new(args[0], self, :instance)
   end
 end
 

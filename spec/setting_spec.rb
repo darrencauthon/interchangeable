@@ -35,6 +35,10 @@ describe Setting do
             Setting.entries.first.target.must_equal eval(example.class_name)
           end
 
+          it "should say that it's an instance method" do
+            Setting.entries.first.level.must_equal :instance
+          end
+
         end
 
         describe "defining the client-specific method" do
