@@ -45,17 +45,22 @@ Interchangeable will provide you a list of the methods you have defined, as well
 
 ```ruby
 class MyApi
+  interchangeable_describe "this is an apple"
   interchangeable_method :apple
+  
+  interchangeable_describe "this is an orange"
   interchangeable_method(:orange) { 'orange' }
+  
+  interchangeable_describe "this is a banana"
   interchangeable_method :banana
 end
 
 Interchangeable.define(MyApi, :banana) { 'banana' }
 
 
-Interchangeable.methods # [<target=MyApi, method_name=:apple,  implemented=false, default=false>,
-                        #  <target=MyApi, method_name=:orange, implemented=true, default=true>,
-                        #  <target=MyApi, method_name=:banana, implemented=true, default=false>]
+Interchangeable.methods # [<target=MyApi, method_name=:apple,  implemented=false, default=false, description="this is an apple">,
+                        #  <target=MyApi, method_name=:orange, implemented=true,  default=true,  description="this is an orange">,
+                        #  <target=MyApi, method_name=:banana, implemented=true,  default=false, description="this is a banana">]
 
 ```
 
