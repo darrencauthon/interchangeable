@@ -21,8 +21,20 @@ describe Setting do
                 end")
         end
 
-        it "should create an entry in the entries" do
-          Setting.entries.count.must_equal 1
+        describe "entries" do
+
+          it "should create an entry" do
+            Setting.entries.count.must_equal 1
+          end
+
+          it "should include the method name" do
+            Setting.entries.first.method_name.must_equal example.method_name.to_sym
+          end
+
+          it "should return the target" do
+            Setting.entries.first.target.must_equal eval(example.class_name)
+          end
+
         end
 
         describe "defining the client-specific method" do

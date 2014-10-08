@@ -2,14 +2,17 @@ require "setting/version"
 
 class Class
   def instance_method *args
+    Setting.entries << Struct.new(:method_name, :target).new(args[0], self)
   end
 end
 
 module Setting
 
   class << self
+
+    attr_accessor :entries
     def entries
-      [Object.new]
+      @settings ||= []
     end
 
     def define the_class, method_name, &block
