@@ -35,8 +35,12 @@ describe Interchangeable do
             Interchangeable.entries.first.target.must_equal eval(example.class_name)
           end
 
-          it "should say that it's an instance method" do
+          it "should say that its an instance method" do
             Interchangeable.entries.first.level.must_equal :instance
+          end
+
+          it "should say that it is not implemented" do
+            Interchangeable.entries.first.implemented.must_equal false
           end
 
         end
@@ -110,6 +114,10 @@ describe Interchangeable do
 
               result = instance.send(example.method_name.to_sym)
               result.must_equal default_value
+            end
+
+            it "should say that it is not implemented" do
+              Interchangeable.entries.first.implemented.must_equal true
             end
 
           end
