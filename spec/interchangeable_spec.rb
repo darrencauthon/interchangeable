@@ -136,6 +136,29 @@ describe Interchangeable do
               Interchangeable.entries.first.default.must_equal true
             end
 
+            describe "and a new implementation is define elsewhere" do
+
+              let(:new_value) { Object.new }
+
+              before do
+                nv = new_value
+                Interchangeable.define(eval(example.class_name), example.method_name.to_sym) do
+                  nv
+                end
+              end
+
+              it "should return the new value" do
+                instance = eval(example.class_name).new
+                result = instance.send(example.method_name.to_sym)
+                result.must_be_same_as new_value
+              end
+
+              it "should reset the default flag to false" do
+                Interchangeable.entries.first.default.must_equal false
+              end
+
+            end
+
           end
 
         end
