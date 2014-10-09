@@ -13,7 +13,7 @@ describe Interchangeable do
       ["Yawn", "applesauce", "make sure this works"],
     ].map { |x| Struct.new(:class_name, :method_name, :description).new(*x) }.each do |example|
 
-      describe "noting the method on a class" do
+      describe "noting the instance method on a class" do
 
         before do
           eval("class #{example.class_name}
