@@ -29,10 +29,13 @@ module Interchangeable
     end
 
     def define the_class, method_name, &block
-      the_class.instance_eval do
+      entry = Interchangeable.methods.select { |x| x.target == the_class && x.method_name && method_name }.first
+      unless entry
+        entry = Interchangeable.methods.select { |x| x.target == the_class.singleton_class && x.method_name && method_name }.first
+      end
+      entry.target.instance_eval do
         define_method method_name, &block
       end
-      entry = Interchangeable.methods.select { |x| x.target == the_class && x.method_name && method_name }.first
       entry.implemented = true
       entry.default     = false
     end

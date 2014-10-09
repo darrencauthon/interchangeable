@@ -13,7 +13,7 @@ describe Interchangeable do
       ["Yawn", "applesauce", "make sure this works"],
     ].map { |x| Struct.new(:class_name, :method_name, :description).new(*x) }.each do |example|
 
-      describe "noting the method on a class" do
+      describe "noting the instance method on a class" do
 
         before do
           eval("class #{example.class_name}
@@ -160,6 +160,47 @@ describe Interchangeable do
 
             end
 
+          end
+
+        end
+
+      end
+
+      describe "noting the class-level method on a class" do
+
+        before do
+          eval("class #{example.class_name}
+                  class << self
+                    interchangeable_describe \"#{example.description}\"
+                    interchangeable_method :#{example.method_name}
+                  end
+                end")
+        end
+
+        describe "methods" do
+
+          it "should create an entry" do
+            Interchangeable.methods.count.must_equal 1
+          end
+
+          it "should return the target as a singleton class" do
+            Interchangeable.methods.first.target.must_equal eval(example.class_name).singleton_class
+          end
+
+        end
+
+        describe "defining the method later" do
+
+          let(:the_return_value) { Object.new }
+
+          before do
+            object = the_return_value
+            Interchangeable.define(eval(example.class_name), eval(":#{example.method_name}")) { object }
+          end
+
+          it "should stamp the method on the object" do
+            instance = eval(example.class_name)
+            instance.send(example.method_name.to_sym).must_be_same_as the_return_value
           end
 
         end
