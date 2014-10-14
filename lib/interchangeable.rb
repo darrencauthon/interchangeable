@@ -1,3 +1,5 @@
+require 'terminal-table'
+require "interchangeable/tables"
 require "interchangeable/version"
 
 class Class
@@ -26,6 +28,10 @@ module Interchangeable
     attr_accessor :methods
     def methods
       @settings ||= []
+    end
+
+    def missing_methods
+      methods.reject { |m| m.implemented }
     end
 
     def define the_class, method_name, &block
