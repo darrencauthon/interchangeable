@@ -3,18 +3,18 @@ require_relative '../../lib/interchangeable/rake'
 
 describe "the rake tasks" do
 
-  describe "undefined" do
+  describe "missing" do
 
-    let(:task_name) { "interchangeable:undefined_methods" }
+    let(:task_name) { "interchangeable:missing_methods" }
 
-    it "should include a rake task for returning the undefined methods" do
+    it "should include a rake task for returning the missing methods" do
       # this will throw if the method is not defined
       Rake::Task[task_name]
     end
 
     it "should output the table" do
       methods         = Object.new
-      Interchangeable.stubs(:undefined_methods).returns methods
+      Interchangeable.stubs(:missing_methods).returns methods
 
       expected_output = Object.new
       Interchangeable::Tables.stubs(:generate).with(methods).returns expected_output
