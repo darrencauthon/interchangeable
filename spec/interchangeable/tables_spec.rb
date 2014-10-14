@@ -28,6 +28,38 @@ describe Interchangeable::Tables do
       end
     end
 
+    describe "with methods" do
+
+      let(:method_definition) { Struct.new(:target, :method_name, :description) }
+
+      let(:methods) do
+        [
+          method_definition.new(Object.new, Object.new, Object.new),
+          method_definition.new(Object.new, Object.new, Object.new),
+        ]
+      end
+
+      it "should return two rows" do
+        table.rows.count.must_equal 2
+      end
+
+      it "should map the target to the first column" do
+        table.rows[0][0].value.must_be_same_as methods[0].target
+        table.rows[1][0].value.must_be_same_as methods[1].target
+      end
+
+      it "should map the method name to the second column" do
+        table.rows[0][1].value.must_be_same_as methods[0].method_name
+        table.rows[1][1].value.must_be_same_as methods[1].method_name
+      end
+
+      it "should map the description to the third column" do
+        table.rows[0][2].value.must_be_same_as methods[0].description
+        table.rows[1][2].value.must_be_same_as methods[1].description
+      end
+
+    end
+
   end
 
 end
