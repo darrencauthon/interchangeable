@@ -1,3 +1,4 @@
+require "interchangeable/tables"
 require "interchangeable/version"
 
 class Class
