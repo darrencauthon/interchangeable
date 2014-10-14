@@ -1,3 +1,4 @@
+require 'terminal-table'
 require "interchangeable/tables"
 require "interchangeable/version"
 
