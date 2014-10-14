@@ -29,6 +29,10 @@ module Interchangeable
       @settings ||= []
     end
 
+    def missing_methods
+      methods.reject { |m| m.implemented }
+    end
+
     def define the_class, method_name, &block
       entry = Interchangeable.methods.select { |x| x.target == the_class && x.method_name && method_name }.first
       unless entry

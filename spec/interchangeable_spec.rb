@@ -226,4 +226,26 @@ describe Interchangeable do
     end
   end
 
+  describe "missing methods" do
+
+    let(:methods) do
+      [
+        Struct.new(:implemented).new(true),
+        Struct.new(:implemented).new(false),
+        Struct.new(:implemented).new(true),
+        Struct.new(:implemented).new(false),
+      ].sort_by { |x| SecureRandom.uuid }
+    end
+
+    it "should return the methods that are not implemented" do
+      Interchangeable.stubs(:methods).returns methods
+
+      results = Interchangeable.missing_methods
+      results.count.must_equal 2
+
+      results.each { |r| r.implemented.must_equal false }
+    end
+
+  end
+
 end
