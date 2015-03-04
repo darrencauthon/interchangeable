@@ -35,9 +35,9 @@ module Interchangeable
     end
 
     def define the_class, method_name, &block
-      entry = Interchangeable.methods.select { |x| x.target == the_class && x.method_name && method_name }.first
+      entry = Interchangeable.methods.select { |x| x.target == the_class && x.method_name && method_name == x.method_name }.first
       unless entry
-        entry = Interchangeable.methods.select { |x| x.target == the_class.singleton_class && x.method_name && method_name }.first
+        entry = Interchangeable.methods.select { |x| x.target == the_class.singleton_class && x.method_name && method_name == x.method_name }.first
       end
       entry.target.instance_eval do
         define_method method_name, &block
